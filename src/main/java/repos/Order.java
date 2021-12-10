@@ -1,52 +1,42 @@
 package repos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Order {
 
-    int id;
-    List<Product> productList;
+    /*
+    should contain: id, products
+     */
 
-    public Order (int id, List<Product> productList){
+    private final int id;
+
+    private Map<Integer, Product> products = new HashMap<>();
+
+    public Order (int id, HashMap<Integer, Product> products) {
+
         this.id = id;
-        this.productList = productList;
+        this.products = products;
     }
 
-    public int getId() {
+
+    public Map<Integer, Product> getProducts(){
+        return products;
+    }
+
+    public void addProduct (Product product){
+        products.put(product.getId(), product);
+    }
+
+    public int getId(){
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id == order.id && Objects.equals(productList, order.productList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, productList);
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", productList=" + productList +
-                '}';
+        return "Bestellnummer=" + id +
+                ", Produkte=" + products;
     }
 }
